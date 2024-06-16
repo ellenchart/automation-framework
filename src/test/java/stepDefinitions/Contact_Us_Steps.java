@@ -9,33 +9,40 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pageObjects.Base_PO;
+import pageObjects.Contact_Us_PO;
 
 public class Contact_Us_Steps extends Base_PO {
     private WebDriver driver = getDriver();
 
+    private Contact_Us_PO contact_us_po;
+
+    public Contact_Us_Steps(Contact_Us_PO contact_us_po) {
+        this.contact_us_po = contact_us_po;
+    }
+
     @Given("I access the webdriver university contact us page")
     public void i_access_the_webdriver_university_contact_us_page() {
-        navigateTo_URL("https://www.webdriveruniversity.com/Contact-Us/contactus.html");
+        contact_us_po.navigateTo_WebDriverUniversity_Contact_Us_Page();
     }
 
     @When("I enter a unique first name")
     public void i_enter_a_unique_first_name() {
-        sendKeys(By.xpath("//input[@name='first_name']"), "AutoFN" + generateRandomNumber(5));
+        contact_us_po.setUnique_FirstName();
     }
 
     @And("I enter a unique last name")
     public void i_enter_a_unique_last_name() {
-        driver.findElement(By.xpath("//input[@name=\"last_name\"]")).sendKeys("AutoLN" + generateRandomNumber(5));
+        contact_us_po.setUnique_LastName();
     }
 
     @And("I enter a unique email address")
     public void i_enter_a_unique_email_address() {
-        driver.findElement(By.xpath("//input[@name=\"email\"]")).sendKeys("AutoEmail" + generateRandomNumber(10) + "@mail.com");
+        contact_us_po.setUnique_EmailAddress();
     }
 
     @And("I enter a unique comment")
     public void i_enter_a_unique_comment() {
-        driver.findElement(By.xpath("//textarea[@name=\"message\"]")).sendKeys("Hello world" + generateRandomString(20));
+        contact_us_po.setUnique_Comment();
     }
 
     @When("I enter a specific first name {word}")
