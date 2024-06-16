@@ -4,15 +4,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import pageObjects.Base_PO;
 import pageObjects.Contact_Us_PO;
 
 public class Contact_Us_Steps extends Base_PO {
-    private WebDriver driver = getDriver();
 
     private Contact_Us_PO contact_us_po;
 
@@ -47,32 +42,31 @@ public class Contact_Us_Steps extends Base_PO {
 
     @When("I enter a specific first name {word}")
     public void i_enter_a_specific_first_name(String firstName) {
-        driver.findElement(By.xpath("//input[@name='first_name']")).sendKeys(firstName);
+        contact_us_po.setSpecific_FirstName(firstName);
     }
 
     @When("I enter a specific last name {word}")
     public void i_enter_a_specific_last_name(String lastName) {
-        driver.findElement(By.xpath("//input[@name=\"last_name\"]")).sendKeys(lastName);
+        contact_us_po.setSpecific_LastName(lastName);
     }
 
     @When("I enter a specific email address {word}")
     public void i_enter_a_specific_email_address(String email) {
-        driver.findElement(By.xpath("//input[@name=\"email\"]")).sendKeys(email);
+        contact_us_po.setSpecific_EmailAddress(email);
     }
 
     @When("I enter a specific comment {string}")
     public void i_enter_a_specific_comment(String comment) {
-        driver.findElement(By.xpath("//textarea[@name=\"message\"]")).sendKeys(comment);
+        contact_us_po.setSpecific_Comment(comment);
     }
 
     @And("I click on the submit button")
     public void i_click_on_the_submit_button() {
-        driver.findElement(By.xpath("//input[@value=\"SUBMIT\"]")).click();
+        contact_us_po.clickOn_Submit_Button();
     }
 
     @Then("I should be presented with a successful contact us submission message")
     public void i_should_be_presented_with_a_successful_contact_us_submission_message() {
-        WebElement contactUs_Submission_Message = driver.findElement(By.xpath("//div[@id='contact_reply']/h1"));
-        Assert.assertEquals(contactUs_Submission_Message.getText(), "Thank You for your Message!");
+        contact_us_po.validate_Successful_SubmissionMessage_Text();
     }
 }
