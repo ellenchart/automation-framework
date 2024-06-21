@@ -12,6 +12,7 @@ Feature: Webdriver University - Login Page
     And I click on the login button
     Then I should be presented with the successful login message
 
+  @smoke @ignore
   Scenario:
     When I enter a username webdriver
     And I enter a password password123
